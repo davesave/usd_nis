@@ -4,17 +4,16 @@
 ############################################################
 
 # Set the base image to Ubuntu
-FROM ubuntu
+FROM ubuntu:13.10
 
-# File Author / Maintainer
-MAINTAINER DaveSave
+MAINTAINER Dave
 
 # Update the sources list
-RUN apt-get update && apt-get install -y tar git curl wget dialog net-tools build-essential
+RUN apt-get update && apt-get install -y python3 python3-pip tar git build-essential
 
-# Install Python and Basic Python Tools
-RUN apt-get install -y python python-dev python-distribute python-pip
-
+VOLUME        ["/export"]
+RUN ls -l /export
+CMD ls -l /export
 
 # Install python modules and transfer code
 RUN rm -rf /build
@@ -22,7 +21,10 @@ RUN mkdir /build
 WORKDIR /build
 
 ADD requirements.txt /build/
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 
 RUN git clone https://github.com/davesave/usd_nis.git
+
+#CMD python /build/usd_nis.py
+CMD python3 /build/usd_nis/usd_nis.py >> /export/test
