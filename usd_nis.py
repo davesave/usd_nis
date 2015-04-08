@@ -43,6 +43,7 @@ print ("Got Currency " + get_blomberg_currency(url+end) + " for " + end )
 
 
 
-
+def test_dave():
+    assert get_blomberg_currency("http://www.bloomberg.com/quote/USDILS:CUR") > 0
 
 
