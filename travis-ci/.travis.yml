@@ -7,6 +7,8 @@ install:
 before_script:
   - pip install -r requirements.txt
 # command to run tests
-script: nosetests -v usd_nis.py
+script: 
+  - nosetests -v usd_nis.py
+  - python usd_nis.py
 after_success:
   - coveralls
